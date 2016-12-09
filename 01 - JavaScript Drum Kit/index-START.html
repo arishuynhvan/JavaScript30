@@ -58,6 +58,29 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
+window.addEventListener("keydown", function(e){
+    const audio= document.querySelector(`audio[data-key="${e.keyCode}"]`); 
+    const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);//select the divs with class key with the right data-key 
+
+    if(!audio) return; //stop the function when a key not associated with sound files is played
+    key.classList.add('playing');
+    audio.currentTime=0;
+    
+    if(audio.currentTime>0) key.classList.remove('playing');
+    audio.play();
+    //Bad way to remove the transition since the effect will not synchronize when the key is pressed for long
+    //setTimeout(function(){key.classList.remove('playing')},100) ;
+    
+});
+function removeTransition(e){
+    if(e.propertyName !== 'transform') return;
+
+    this.classList.remove('playing');
+}
+//Listen for transition end events
+const keys= document.querySelectorAll(`.key`);
+
+keys.forEach(key=>key.addEventListener('transitionend',removeTransition));
 
 </script>
 
