@@ -1,0 +1,1 @@
+[WebAudioAPI synthesized drum sound](https://dev.opera.com/articles/drum-sounds-webaudio/)
